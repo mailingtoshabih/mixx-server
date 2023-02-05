@@ -47,7 +47,7 @@ const userSchema = mongoose.Schema(
         city : {
             type : String,
             max : 20,
-            default : "Titan"
+            default : "Earth"
         }
     },
     { timeStamps: true }
