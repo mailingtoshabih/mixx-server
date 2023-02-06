@@ -21,10 +21,11 @@ router.post('/register', async (req, res) => {
             {
                 username: req.body.username,
                 email: req.body.email,
-                password: pass
+                password: pass,
+                profilePicture : req.body.profilePicture
             }
         );
-
+            console.log(req.body.profilePicture);
         await newUser.save();
         res.send('User registered...');
     } catch (exception) {

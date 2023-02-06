@@ -13,6 +13,10 @@ const postSchema = mongoose.Schema(
             type : String,
             require : true
         },
+        profilePicture : {
+            type : String,
+            default : ""
+        },
         description : {
             type : String,
             max : 500
