@@ -82,7 +82,6 @@ router.get('/all', async (req, res) => {
 
 
 
-
 // follow a user
 router.put('/follow/:email', async (req, res) => {
 
@@ -90,7 +89,7 @@ router.put('/follow/:email', async (req, res) => {
       else {
             const otherUser = await User.findOne({ email: req.params.email });
             const thisUser = await User.findOne({ email: req.body.email });
-
+            
             if (otherUser && thisUser) {
 
                   const isFollowing = thisUser.followings.includes(otherUser.email);
@@ -112,6 +111,7 @@ router.put('/follow/:email', async (req, res) => {
             }
       }
 });
+
 
 
 // unfollow a user
@@ -144,7 +144,6 @@ router.put('/unfollow/:email', async (req, res) => {
 
 
 // get followings
-
 router.get("/followings/:email", async (req, res) => {
 
       try {
@@ -174,11 +173,26 @@ router.get("/followings/:email", async (req, res) => {
 
 
 
+// get my followers data
+router.get("/followers/:email", async (req,res) => {
+      try{
+            const user = await User.findOne({email : req.params.email});
+            
+            const myFollowers = await Promise.all(
+                  user?.followers.map( (followerEmail) => {
+                        return User.findOne({email : followerEmail})
+                  } )
+                  )
+            
+            res.send(myFollowers) 
+
+      }
+      catch(exc){
+            res.send(exc.message)
+      }
+})
 
 
-
-
-// show my followers
 
 
 

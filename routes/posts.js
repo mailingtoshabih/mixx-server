@@ -3,6 +3,7 @@ const router = express.Router();
 
 const Post = require('../models/Post');
 const User = require('../models/User');
+
 // ---------------------------------------------------
 
 
@@ -24,6 +25,7 @@ router.post('/', async (req, res) => {
 
 
 
+
 // update a post
 router.put('/:email', async (req, res) => {                                         // use id instead of email in production
 
@@ -42,21 +44,25 @@ router.put('/:email', async (req, res) => {                                     
 
 
 
+
 // delete a post
-router.delete('/:email', async (req, res) => {                                         // use id instead of email in production
+router.delete('/delete/:id', async (req, res) => {                                         // use id instead of email in production
 
     try {
-        const post = await Post.findOne({ email: req.params.email });
+        const post = await Post.find({ _id: req.params.id });
 
         if (post.email !== req.body.email) res.send("You can only delete your post...");
-        else {
-            const result = await post.deleteOne();
+        else{
+            const result = await Post.findOneAndDelete({_id : req.params.id});
             res.send("Post deleted...");
         }
+
     } catch (exc) {
         res.send(exc.message);
     }
 })
+
+
 
 
 // like/dislike a post
@@ -67,7 +73,6 @@ router.put('/like/:id', async (req, res) => {
 
         if (post.likes.includes(req.body.email)) {
             await post.updateOne({ $pull: { likes: req.body.email } });
-            
             res.send("AlreadyLiked");
 
         } else {
@@ -81,6 +86,7 @@ router.put('/like/:id', async (req, res) => {
     }
 
 })
+
 
 
 
