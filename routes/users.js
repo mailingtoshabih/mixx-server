@@ -158,8 +158,8 @@ router.get("/followings/:email", async (req, res) => {
             let followingList = [];
             
             followings?.map((f) => {
-                  const { _id, email, username, profilePicture } = f;
-                  followingList.push({_id, email, username, profilePicture });
+                  const { _id, email, username, profilePicture, followers } = f;
+                  followingList.push({_id, email, username, profilePicture, followers });
             })
 
             res.send(followingList);
@@ -192,6 +192,19 @@ router.get("/followers/:email", async (req,res) => {
       }
 })
 
+
+// get follow status
+router.get("/:otheruser/isfollowing/:thisuser", async (req,res) => {
+
+      try{
+            const otheruser = await User.findOne({email : req.params.otheruser});     //finds other user
+            const thisuser = await User.findOne({email : req.params.thisuser});     //finds current user
+            const status = otheruser?.followings?.includes(thisuser?.email);
+            status && res.send(status)
+      }catch(exc){
+            res.send("Some error occurred...")
+      }
+})
 
 
 
