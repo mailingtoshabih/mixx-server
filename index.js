@@ -43,7 +43,7 @@ app.use('/api/posts', postRoute);
 
 
 app.get("/", (req,res) => {
-    res.send("Kindly visit https://mixme.onrender.com");
+    res.send("Kindly visit https://bliss.onrender.com");
 })
 
 
