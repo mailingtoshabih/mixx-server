@@ -25,7 +25,7 @@ router.post('/register', async (req, res) => {
                 profilePicture : req.body.profilePicture
             }
         );
-            console.log(req.body.profilePicture);
+
         await newUser.save();
         res.send('User registered...');
     } catch (exception) {

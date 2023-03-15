@@ -7,12 +7,9 @@ const User = require('../models/User');
 // ---------------------------------------------------
 
 
- 
 
 // create a post
 router.post('/', async (req, res) => {
-
-    
     try {
         const newpost = new Post(req.body);
         result = await newpost.save();
@@ -27,7 +24,7 @@ router.post('/', async (req, res) => {
 
 
 // update a post
-router.put('/:email', async (req, res) => {                                         // use id instead of email in production
+router.put('/:email', async (req, res) => {            // use id instead of email in production
 
     try {
         const post = await Post.findOne({ email: req.params.email });
