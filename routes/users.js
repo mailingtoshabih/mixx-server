@@ -10,7 +10,7 @@ const User = require('../models/User');
 
 
 
-// update a user
+// update user
 router.put('/update/:email', async (req, res) => {
 
       try {

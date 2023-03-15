@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 
 
-
-// creating the user schema
+// creating the schema
 const postSchema = mongoose.Schema(
     {
         email: {
